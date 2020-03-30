@@ -7,9 +7,13 @@ import logging
 
 
 def get_users_home():
+    """ Function returns user's home path """
+
     return expanduser("~")
 
 def get_all_profiles(users_home):
+    """ Function receive user's home and return all aws profiles """
+
     profiles = {}
     config = configparser.ConfigParser()
     config.read('{}/.aws/credentials'.format(users_home))
@@ -22,6 +26,9 @@ def get_all_profiles(users_home):
     return profiles
 
 def find_default_profile_among_all(profiles):
+    """ Function receives all profiles and looks for duplication of default. 
+        It returns default if one is found and None if not """
+
     for profile in profiles:
         if profile == 'default':
             continue
@@ -30,6 +37,8 @@ def find_default_profile_among_all(profiles):
     return None
 
 def new_profile_name_is_among_all_proiles(profiles, new_default_name):
+    """ Function receives all profiles and new default name. 
+        It returns True if name is already exists in among profiles and False if not """
     return new_default_name in profiles
 
 def get_new_name_for_default_profile(users_home, profiles):
