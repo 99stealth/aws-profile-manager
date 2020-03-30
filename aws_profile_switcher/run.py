@@ -102,6 +102,8 @@ def main():
         new_default_profile_name = get_new_name_for_default_profile(users_home, profiles)
         if new_default_profile_name:
             profiles = create_backup_for_default(profiles, new_default_profile_name)
+    else:
+        new_default_profile_name = None
     new_default = choose_new_default(profiles, new_default_profile_name)
     new_profiles_list = generate_new_profile_list(profiles, new_default)
     rewrite_credentials_file(new_profiles_list, users_home)
