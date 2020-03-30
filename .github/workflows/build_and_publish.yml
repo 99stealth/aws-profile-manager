@@ -1,0 +1,41 @@
+name: Build and Publish
+
+on:
+  push:
+    paths-ignore:
+      - '.gitignore'
+      - '**.md'
+      - '**.in'
+      - 'LICENSE'
+    tags:
+      - v*
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        python-version: [3.7]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install -U wheel twine setuptools
+    - name: Build
+      run: |
+        python setup.py sdist bdist_wheel
+    - name: Check build
+      run: |
+        twine check dist/*
+    - name: Deliver
+      env:
+        PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        twine upload dist/* --username ${PYPI_USERNAME} --password ${PYPI_PASSWORD}

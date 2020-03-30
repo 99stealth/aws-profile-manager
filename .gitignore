@@ -1,0 +1,14 @@
+.vscode
+.DS_Store
+Icon?
+env
+.env
+*.swp
+*.pyc
+__pycache__
+dist/**
+*.egg-info
+.coverage
+beta/
+build/
+**/credentials
