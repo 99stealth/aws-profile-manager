@@ -9,7 +9,7 @@ def readme():
 
 setup(
     name='aws-profile-switcher',
-    version='0.0.2',
+    version='0.0.3',
     description='This util allows you to switch default AWS CLI profile',
     long_description=readme(),
     long_description_content_type="text/markdown",

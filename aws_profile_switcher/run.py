@@ -78,7 +78,7 @@ def choose_new_default(profiles, new_default_profile_name):
         i = i + 1
     for c in counter:
         print("{}: {}".format(c, counter[c]))
-    answer = input("Choose a number of the account to which you want to switch your current default: ")
+    answer = input("\nChoose a number of the account to which you want to switch your current default: ")
     return counter[int(answer)]
 
 def generate_new_profile_list(profiles, new_default):
@@ -94,16 +94,29 @@ def rewrite_credentials_file(new_profiles_list, users_home):
         config[profile] = new_profiles_list[profile]
     config.write(open('{}/.aws/credentials'.format(users_home), 'w'))
 
+def setup_logging(quiet=False, verbose=False):
+    ''' Function is setting logging configuration '''
+
+    if verbose:
+        logging_level = logging.INFO
+    elif quiet:
+        logging_level = logging.ERROR
+    else:
+        logging_level = logging.WARNING
+    logging.basicConfig(format='%(message)s', level=logging_level)
+
 def main():
+    setup_logging()
     users_home = get_users_home()
     profiles = get_all_profiles(users_home)
     default_profile_name = find_default_profile_among_all(profiles)
-    if not default_profile_name:
+    if default_profile_name:
+        logging.warning("Your current default is \033[1m{}\033[0m \n".format(default_profile_name))
+        new_default_profile_name = None
+    else:
         new_default_profile_name = get_new_name_for_default_profile(users_home, profiles)
         if new_default_profile_name:
             profiles = create_backup_for_default(profiles, new_default_profile_name)
-    else:
-        new_default_profile_name = None
     new_default = choose_new_default(profiles, new_default_profile_name)
     new_profiles_list = generate_new_profile_list(profiles, new_default)
     rewrite_credentials_file(new_profiles_list, users_home)
