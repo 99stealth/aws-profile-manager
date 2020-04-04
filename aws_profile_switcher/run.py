@@ -25,7 +25,10 @@ def get_all_profiles(users_home):
         profiles[section] = section_items
     return profiles
 
-def find_default_profile_among_all(profiles):
+def check_default_exists(profiles):
+    return "default" in profiles
+
+def get_defaults_backup(profiles):
     """ Function receives all profiles and looks for duplication of default. 
         It returns default if one is found and None if not """
 
@@ -41,7 +44,7 @@ def new_profile_name_is_among_all_proiles(profiles, new_default_name):
         It returns True if name is already exists in among profiles and False if not """
     return new_default_name in profiles
 
-def get_new_name_for_default_profile(users_home, profiles):
+def ask_new_name_for_default_profile(users_home, profiles):
     print("There is no default profile duplication among all accounts in {}/.aws/credentials".format(users_home))
     while True:
         answer = input("Do you want to make backup of your current [default] profile? [Y/n] ")
@@ -108,18 +111,23 @@ def setup_logging(quiet=False, verbose=False):
 def main():
     setup_logging()
     users_home = get_users_home()
-    profiles = get_all_profiles(users_home)
-    default_profile_name = find_default_profile_among_all(profiles)
-    if default_profile_name:
-        logging.warning("Your current default is \033[1m{}\033[0m \n".format(default_profile_name))
-        new_default_profile_name = None
+    all_profiles = get_all_profiles(users_home)
+    default_in_credentials_file = check_default_exists(all_profiles)
+    new_default_profile_name = None
+    if not default_in_credentials_file:
+        logging.warning("There is no [default] profile in your {}/.aws/credentials. It will be automatically created".format(users_home))
     else:
-        new_default_profile_name = get_new_name_for_default_profile(users_home, profiles)
-        if new_default_profile_name:
-            profiles = create_backup_for_default(profiles, new_default_profile_name)
-    new_default = choose_new_default(profiles, new_default_profile_name)
-    new_profiles_list = generate_new_profile_list(profiles, new_default)
+        defaults_backup = get_defaults_backup(all_profiles)
+        if defaults_backup:
+            logging.warning("Your current default is \033[1m{}\033[0m \n".format(defaults_backup))
+        else:
+            new_default_profile_name = ask_new_name_for_default_profile(users_home, all_profiles)
+            if new_default_profile_name:
+                all_profiles = create_backup_for_default(all_profiles, new_default_profile_name)
+    new_default = choose_new_default(all_profiles, new_default_profile_name)
+    new_profiles_list = generate_new_profile_list(all_profiles, new_default)
     rewrite_credentials_file(new_profiles_list, users_home)
+
 
 if __name__ == "__main__":
     try:
