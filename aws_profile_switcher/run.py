@@ -2,16 +2,17 @@
 
 from os.path import expanduser
 import sys
+from typing import Dict
 import configparser
 import logging
 
 
-def get_users_home():
+def get_users_home() -> str:
     """ Function returns user's home path """
 
     return expanduser("~")
 
-def get_all_profiles(users_home):
+def get_all_profiles(users_home: str) -> Dict:
     """ Function receive user's home and return all aws profiles """
 
     profiles = {}
@@ -25,10 +26,10 @@ def get_all_profiles(users_home):
         profiles[section] = section_items
     return profiles
 
-def check_default_exists(profiles):
+def check_default_exists(profiles: Dict) -> bool:
     return "default" in profiles
 
-def get_defaults_backup(profiles):
+def get_defaults_backup(profiles: Dict):
     """ Function receives all profiles and looks for duplication of default. 
         It returns default if one is found and None if not """
 
@@ -39,18 +40,13 @@ def get_defaults_backup(profiles):
             return profile
     return None
 
-def new_profile_name_is_among_all_proiles(profiles, new_default_name):
-    """ Function receives all profiles and new default name. 
-        It returns True if name is already exists in among profiles and False if not """
-    return new_default_name in profiles
-
-def ask_new_name_for_default_profile(users_home, profiles):
+def ask_new_name_for_default_profile(users_home: str, profiles: Dict):
     print("There is no default profile duplication among all accounts in {}/.aws/credentials".format(users_home))
     while True:
         answer = input("Do you want to make backup of your current [default] profile? [Y/n] ")
         if answer.lower() == "yes" or answer.lower() == "y":
             new_default_name = input("Enter new name for your currnet [default] profile: ")
-            if new_profile_name_is_among_all_proiles(profiles, new_default_name):
+            if new_default_name in profiles:
                 print("Profile with name {} is already exists in {}/.aws/credentials. Try once more".format(new_default_name, users_home))
                 continue
             else:
@@ -67,37 +63,37 @@ def ask_new_name_for_default_profile(users_home, profiles):
         else:
             print("Yes or No?")
 
-def create_backup_for_default(profiles, new_default_profile_name):
+def create_backup_for_default(profiles: Dict, new_default_profile_name: str) -> Dict:
     profiles[new_default_profile_name] = profiles["default"]
     return profiles
 
-def choose_new_default(profiles, new_default_profile_name):
+def choose_new_default(profiles: Dict, new_default_profile_name: str) -> str:
     i = 1
     counter = {}
     for profile in profiles:
         if profile == "default" or profile == new_default_profile_name:
             continue
         counter[i] = profile
-        i = i + 1
+        i += 1
     for c in counter:
         print("{}: {}".format(c, counter[c]))
     answer = input("\nChoose a number of the account to which you want to switch your current default: ")
     return counter[int(answer)]
 
-def generate_new_profile_list(profiles, new_default):
+def generate_new_profile_list(profiles: Dict, new_default: str) -> str:
     profiles.pop('default', None)
     profiles["default"] = {}
     for i in profiles[new_default]:
         profiles["default"][i] = profiles[new_default][i]
     return profiles
 
-def rewrite_credentials_file(new_profiles_list, users_home):
+def rewrite_credentials_file(new_profiles_list: Dict, users_home: str):
     config = configparser.ConfigParser()
     for profile in new_profiles_list:
         config[profile] = new_profiles_list[profile]
     config.write(open('{}/.aws/credentials'.format(users_home), 'w'))
 
-def setup_logging(quiet=False, verbose=False):
+def setup_logging(quiet: bool, verbose: bool):
     ''' Function is setting logging configuration '''
 
     if verbose:
@@ -109,7 +105,7 @@ def setup_logging(quiet=False, verbose=False):
     logging.basicConfig(format='%(message)s', level=logging_level)
 
 def main():
-    setup_logging()
+    setup_logging(quiet=False, verbose=False)
     users_home = get_users_home()
     all_profiles = get_all_profiles(users_home)
     default_in_credentials_file = check_default_exists(all_profiles)
@@ -127,7 +123,6 @@ def main():
     new_default = choose_new_default(all_profiles, new_default_profile_name)
     new_profiles_list = generate_new_profile_list(all_profiles, new_default)
     rewrite_credentials_file(new_profiles_list, users_home)
-
 
 if __name__ == "__main__":
     try:
