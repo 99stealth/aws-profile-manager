@@ -1,3 +1,4 @@
+from aws_profile_switcher._version import __version__
 from setuptools import setup, find_packages
 
 
@@ -9,7 +10,7 @@ def readme():
 
 setup(
     name='aws-profile-switcher',
-    version='0.0.5',
+    version=__version__,
     description='This util allows you to switch default AWS CLI profile',
     long_description=readme(),
     long_description_content_type="text/markdown",
