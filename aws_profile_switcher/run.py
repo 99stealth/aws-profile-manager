@@ -26,9 +26,6 @@ def get_all_profiles(users_home: str) -> Dict:
         profiles[section] = section_items
     return profiles
 
-def check_default_exists(profiles: Dict) -> bool:
-    return "default" in profiles
-
 def get_defaults_backup(profiles: Dict):
     """ Function receives all profiles and looks for duplication of default. 
         It returns default if one is found and None if not """
@@ -110,9 +107,8 @@ def main():
     setup_logging(quiet=False, verbose=False)
     users_home = get_users_home()
     all_profiles = get_all_profiles(users_home)
-    default_in_credentials_file = check_default_exists(all_profiles)
     new_default_profile_name = None
-    if not default_in_credentials_file:
+    if "default" not in all_profiles:
         logging.warning("There is no [default] profile in your {}/.aws/credentials. It will be automatically created".format(users_home))
     else:
         defaults_backup = get_defaults_backup(all_profiles)
