@@ -14,3 +14,7 @@ Or `clone` this repository and run
 ```
 make install
 ```
+
+## How does it work
+### In case you have a default but no backup for it
+![alt text](.media/backup-for-default.gif)
