@@ -16,5 +16,35 @@ make install
 ```
 
 ## How does it work
+### Simple switch
+![Simple switch](.media/simple-switch.gif)
+What have you seen:
+- User called `aws-profile-switcher`
+- `aws-profile-switcher` identified that current default is among of all profiles so it allowd to proceed without any aditional operations
+- `aws-profile-switcher` asked user to choose new default profile
+- `aws-profile-switcher` switched the default
+
 ### In case you have a default but no backup for it
-![alt text](.media/backup-for-default.gif)
+![Backup for default](.media/backup-for-default.gif)
+What have you seen:
+- User called `aws-profile-switcher`
+- `aws-profile-switcher` understood that there is no backup for profile that is currently set to default and suggested to make a backup
+- User agreed to make a backup and gave it the name
+- `aws-profile-switcher` asked user to choose new default profile
+- Voila, default is changed and the old default is backed up
+
+### In case there is no default at all
+![No default at all](.media/no-default.gif)
+What have you seen:
+- User called `aws-profile-switcher`
+- `aws-profile-switcher` asked user to choose new default profile
+- There was no defalut profile at all, so `aws-profile-switcher` has created it
+
+### In case user doesn't want backing up the default
+![No backup for the default](.media/no-default.gif)
+What have you seen:
+- User called `aws-profile-switcher`
+- `aws-profile-switcher` understood that there is no backup for profile that is currently set to default and suggested to make a backup
+- User disagreed to make a backup
+- `aws-profile-switcher` asked to agreed that he/she doesn't want to make a backup
+- Default is changed and the old default was not backed up
