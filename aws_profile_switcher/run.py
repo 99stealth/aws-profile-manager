@@ -3,8 +3,11 @@
 from os.path import expanduser
 import sys
 from typing import Dict
+import argparse
 import configparser
 import logging
+
+from aws_profile_switcher._version import __version__
 
 
 def get_users_home() -> str:
@@ -103,7 +106,22 @@ def setup_logging(quiet: bool, verbose: bool):
         logging_level = logging.WARNING
     logging.basicConfig(format='%(message)s', level=logging_level)
 
+def parse_arguments():
+    ''' Function allows to parse arguments from the line input and check if all
+    of them are entered correctly '''
+
+    parser = argparse.ArgumentParser(
+        description='Create mapping for CloudFormation with AMIs by region',
+        epilog='Find more at https://github.com/99stealth/cfn-ami-to-mapping'
+    )
+    parser.add_argument('--version', action='version',
+                        version='%(prog)s \033[0;32m{version}\033[0;0m'.format(version=__version__))
+
+    args = parser.parse_args()
+    return args
+
 def main():
+    args = parse_arguments()
     setup_logging(quiet=False, verbose=False)
     users_home = get_users_home()
     all_profiles = get_all_profiles(users_home)
