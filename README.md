@@ -3,7 +3,7 @@
 ![Vulnerability Check](https://img.shields.io/snyk/vulnerabilities/github/99stealth/aws-profile-switcher)
 [![PyPI version](https://badge.fury.io/py/aws-profile-switcher.svg)](https://badge.fury.io/py/aws-profile-switcher)
 ![GitHub License](https://img.shields.io/github/license/99stealth/aws-profile-switcher)
-![Commit Activity](https://img.shields.io/github/commit-activity/w/99stealth/aws-profile-switcher)
+![Commit Activity](https://img.shields.io/github/commit-activity/m/99stealth/aws-profile-switcher)
 
 The tool which allows you to jump between your profiles in your `~/.aws/credentials`
 
