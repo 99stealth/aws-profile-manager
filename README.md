@@ -1,7 +1,7 @@
 # AWS Profile Switcher
 [![Actions Status](https://github.com/99stealth/aws-profile-switcher/workflows/main/badge.svg)](https://github.com/99stealth/aws-profile-switcher/actions)
 [![PyPI version](https://badge.fury.io/py/aws-profile-switcher.svg)](https://badge.fury.io/py/aws-profile-switcher)
-![GitHub License](https://img.shields.io/github/license/99stealth/aws-proofile-switcher)
+![GitHub License](https://img.shields.io/github/license/99stealth/aws-profile-switcher)
 ![Commit Activity](https://img.shields.io/github/commit-activity/w/99stealth/aws-profile-switcher)
 
 The tool which allows you to jump between your profiles in your `~/.aws/credentials`
