@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "------------------ Testing with image names ------------------"
+echo "----------- Testing utility version functionality -----------"
 
 python3 -m aws_profile_switcher.run --version
 
