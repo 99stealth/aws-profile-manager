@@ -1,0 +1,39 @@
+import unittest
+from aws_profile_switcher import Switch
+
+class TestCommon(unittest.TestCase):
+    def setUp(self):
+        self.switch = Switch()
+
+    def test_get_defaults_backup_without_default_backup(self):
+        test_data = {
+                    'default': 
+                        {
+                            'aws_access_key_id': 'AKIAYYYYYYYYYYYYYYYY',
+                            'aws_secret_access_key': 'yYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyY'
+                        },
+                    'test1': 
+                        {
+                            'aws_access_key_id': 'AKIAZZZZZZZZZZZZZZZZ',
+                            'aws_secret_access_key': 'zZzZzZzZzZzZzZzZzZzZzZzZzZzZzZzZzZzZzZzZ'}
+                    }
+        expected_output = None
+        self.assertEquals(self.switch.get_defaults_backup(test_data), expected_output)
+
+    def test_get_defaults_backup_with_default_backup(self):
+        test_data = {
+                    'default': 
+                        {
+                            'aws_access_key_id': 'AKIAYYYYYYYYYYYYYYYY',
+                            'aws_secret_access_key': 'yYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyY'
+                        },
+                    'test1': 
+                        {
+                            'aws_access_key_id': 'AKIAYYYYYYYYYYYYYYYY',
+                            'aws_secret_access_key': 'yYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyYyY'}
+                    }
+        expected_output = 'test1'
+        self.assertEquals(self.switch.get_defaults_backup(test_data), expected_output)
+
+if __name__ == '__main__':
+    unittest.main()

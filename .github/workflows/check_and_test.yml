@@ -36,3 +36,7 @@ jobs:
     - name: Unit tests
       run: |
         nosetests -v --all-modules --with-coverage --cover-package=aws_profile_switcher
+    - name: Smoke tests
+      run: |
+        TEST_DIR='.github/smoke_tests/'
+        for test in `ls ${TEST_DIR}`; do bash ${TEST_DIR}/${test}; done

@@ -28,7 +28,7 @@ setup(
     ],
     packages=find_packages(exclude=['aws-profile-switcher.tests']),
     include_package_data=True,
-    install_requires=['configparser'],
+    install_requires=['configparser', 'argparse'],
     entry_points={
         'console_scripts': [
             'aws-profile-switcher=aws_profile_switcher.run:main'
