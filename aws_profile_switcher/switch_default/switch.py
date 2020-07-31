@@ -1,4 +1,5 @@
 from typing import Dict
+import logging
 
 class Switch:
     def get_defaults_backup(self, profiles: Dict):
@@ -54,5 +55,9 @@ class Switch:
             i += 1
         for c in counter:
             print("{}: {}".format(c, counter[c]))
-        answer = input("\nChoose a number of the account to which you want to switch your current default: ")
-        return counter[int(answer)]
+        while True:
+            answer = input("\nChoose a number of the account to which you want to switch your current default: ")
+            try:
+                return counter[int(answer)]
+            except ValueError as e:
+                logging.error("Answer \"{}\" is not valid. Please provide number from 1 to {}".format(answer, len(counter)))
