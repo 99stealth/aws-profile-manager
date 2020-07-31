@@ -23,8 +23,8 @@ def parse_arguments():
     of them are entered correctly '''
 
     parser = argparse.ArgumentParser(
-        description='Create mapping for CloudFormation with AMIs by region',
-        epilog='Find more at https://github.com/99stealth/cfn-ami-to-mapping'
+        description='Manage AWS profile in a fast way',
+        epilog='Find more at https://github.com/99stealth/aws-profile-switcher'
     )
     parser.add_argument('--version', action='version',
                         version='%(prog)s \033[0;32m{version}\033[0;0m'.format(version=__version__))
