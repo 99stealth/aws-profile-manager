@@ -3,9 +3,9 @@
 import sys
 import argparse
 import logging
-from aws_profile_switcher import Common, Switch
+from aws_profile_manager import Common, Switch
 
-from aws_profile_switcher._version import __version__
+from aws_profile_manager._version import __version__
 
 def setup_logging(quiet: bool, verbose: bool):
     ''' Function is setting logging configuration '''

@@ -1,9 +1,10 @@
-# AWS Profile Switcher
-[![Actions Status](https://github.com/99stealth/aws-profile-switcher/workflows/Check%20and%20Test/badge.svg)](https://github.com/99stealth/aws-profile-switcher/actions)
-![Vulnerability Check](https://img.shields.io/snyk/vulnerabilities/github/99stealth/aws-profile-switcher)
-[![PyPI version](https://badge.fury.io/py/aws-profile-switcher.svg)](https://badge.fury.io/py/aws-profile-switcher)
-![GitHub License](https://img.shields.io/github/license/99stealth/aws-profile-switcher)
-![Commit Activity](https://img.shields.io/github/commit-activity/m/99stealth/aws-profile-switcher)
+# AWS Profile ~~Switcher~~  Manager
+Yes, we do extend the functionality, and now it not just only switches the default profile but also you can add a profile
+[![Actions Status](https://github.com/99stealth/aws-profile-manager/workflows/Check%20and%20Test/badge.svg)](https://github.com/99stealth/aws-profile-manager/actions)
+![Vulnerability Check](https://img.shields.io/snyk/vulnerabilities/github/99stealth/aws-profile-manager)
+[![PyPI version](https://badge.fury.io/py/aws-profile-manager.svg)](https://badge.fury.io/py/aws-profile-manager)
+![GitHub License](https://img.shields.io/github/license/99stealth/aws-profile-manager)
+![Commit Activity](https://img.shields.io/github/commit-activity/m/99stealth/aws-profile-manager)
 
 The tool which allows you to jump between your profiles in your `~/.aws/credentials`
 
@@ -14,15 +15,15 @@ Another example is about Hashicorp Terraform. Let's imagine that you have one mo
 ## How to install
 That's easy just run
 ```
-sudo pip install aws-profile-switcher
+sudo pip install aws-profile-manager
 ```
 Or `clone` this repository and run
 ```
 make install
 ```
 
-## How does it work
-### Simple switch
+## How does it work (Legacy)
+### Simple switch (Legacy)
 ![Simple switch](.media/simple-switch.gif)
 
 What have you seen:
@@ -31,7 +32,7 @@ What have you seen:
 - `aws-profile-switcher` asked user to choose new default profile
 - `aws-profile-switcher` switched the default
 
-### In case you have a default but no backup for it
+### In case you have a default but no backup for it (Legacy)
 ![Backup for default](.media/backup-for-default.gif)
 
 What have you seen:
@@ -41,7 +42,7 @@ What have you seen:
 - `aws-profile-switcher` asked user to choose new default profile
 - Voila, default is changed and the old default is backed up
 
-### In case there is no default at all
+### In case there is no default at all (Legacy)
 ![No default at all](.media/no-default.gif)
 
 What have you seen:
@@ -49,7 +50,7 @@ What have you seen:
 - `aws-profile-switcher` asked user to choose new default profile
 - There was no defalut profile at all, so `aws-profile-switcher` has created it
 
-### In case user doesn't want backing up the default
+### In case user doesn't want backing up the default (Legacy)
 ![No backup for the default](.media/no-default.gif)
 
 What have you seen:

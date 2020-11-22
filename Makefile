@@ -1,4 +1,4 @@
-UTIL_NAME = aws-profile-switcher
+UTIL_NAME = aws-profile-manager
 
 install: build
 	@echo "Installing $(UTIL_NAME)"

@@ -1,7 +1,7 @@
 FROM python:latest
 
-COPY . /aws-profile-switcher
-WORKDIR /aws-profile-switcher
+COPY . /aws-profile-manager
+WORKDIR /aws-profile-manager
 
 RUN mkdir /root/.aws/
 COPY .github/tests/credentials /root/.aws/
