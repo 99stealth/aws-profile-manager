@@ -12,7 +12,7 @@ def readme():
 setup(
     name='aws-profile-manager',
     version=__version__,
-    description='This util allows you to switch default AWS CLI profile',
+    description='This util allows you to manager your AWS profiles like add, remove, update and switch default AWS CLI profile',
     long_description=readme(),
     long_description_content_type="text/markdown",
     url='https://github.com/99stealth/aws-profile-manager',
@@ -29,7 +29,7 @@ setup(
     ],
     packages=find_packages(exclude=['aws-profile-manager.tests']),
     include_package_data=True,
-    install_requires=['configparser', 'argparse'],
+    install_requires=['configparser', 'argparse', 'click'],
     entry_points={
         'console_scripts': [
             'aws-profile-manager=aws_profile_manager.run:main'
