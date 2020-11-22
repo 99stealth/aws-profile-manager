@@ -2,7 +2,7 @@
 
 echo "----------- Testing utility version functionality -----------"
 
-python3 -m aws_profile_switcher.run --version
+python3 -m aws_profile_manager.run --version
 
 if [ $? == 0 ]; then 
     echo "[+] Test Passed"

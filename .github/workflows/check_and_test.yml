@@ -35,7 +35,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Unit tests
       run: |
-        nosetests -v --all-modules --with-coverage --cover-package=aws_profile_switcher
+        nosetests -v --all-modules --with-coverage --cover-package=aws_profile_manager
     - name: Smoke tests
       run: |
         TEST_DIR='.github/smoke_tests/'

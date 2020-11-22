@@ -1,4 +1,5 @@
-from aws_profile_switcher._version import __version__
+
+from aws_profile_manager._version import __version__
 from setuptools import setup, find_packages
 
 
@@ -9,12 +10,12 @@ def readme():
 
 
 setup(
-    name='aws-profile-switcher',
+    name='aws-profile-manager',
     version=__version__,
     description='This util allows you to switch default AWS CLI profile',
     long_description=readme(),
     long_description_content_type="text/markdown",
-    url='https://github.com/99stealth/aws-profile-switcher',
+    url='https://github.com/99stealth/aws-profile-manager',
     author='Roman Banakh',
     author_email='banakh.ri@gmail.com',
     license='MIT',
@@ -26,12 +27,12 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
     ],
-    packages=find_packages(exclude=['aws-profile-switcher.tests']),
+    packages=find_packages(exclude=['aws-profile-manager.tests']),
     include_package_data=True,
     install_requires=['configparser', 'argparse'],
     entry_points={
         'console_scripts': [
-            'aws-profile-switcher=aws_profile_switcher.run:main'
+            'aws-profile-manager=aws_profile_manager.run:main'
         ]
     }
 )

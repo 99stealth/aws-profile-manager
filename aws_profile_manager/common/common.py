@@ -1,4 +1,5 @@
 import sys
+import re
 from os.path import expanduser
 from typing import Dict
 import configparser
@@ -44,3 +45,21 @@ class Common:
         for profile in new_profiles_list:
             config[profile] = new_profiles_list[profile]
         config.write(open('{}/.aws/credentials'.format(users_home), 'w'))
+
+    def aws_access_key_id_is_valid(self, aws_access_key_id):
+        ''' The method receives the string with AWS Access Key ID and checks if
+        it is valid. If everything is in order it will return True otherwise
+        it returns False '''
+
+        if re.match('^AK[A-Z0-9]{18}$', aws_access_key_id):
+            return True
+        return False
+
+    def aws_secret_access_key_is_valid(self, aws_secret_access_key):
+        ''' The method receives the string with AWS Secret Access Key and
+        checks if it is valid. If everything is in order it will return True
+        otherwise it returns False '''
+
+        if re.match('^[A-Za-z0-9+=/]{40}$', aws_secret_access_key):
+            return True
+        return False

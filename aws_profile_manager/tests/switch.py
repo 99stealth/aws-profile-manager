@@ -1,5 +1,5 @@
 import unittest
-from aws_profile_switcher import Switch
+from aws_profile_manager import Switch
 
 class TestCommon(unittest.TestCase):
     def setUp(self):
