@@ -32,7 +32,7 @@ setup(
     install_requires=['configparser', 'argparse', 'click'],
     entry_points={
         'console_scripts': [
-            'aws-profile-manager=aws_profile_manager.run:main'
+            'aws-profile-manager=aws_profile_manager.cli:main'
         ]
     }
 )
