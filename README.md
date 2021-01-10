@@ -1,10 +1,14 @@
 # AWS Profile ~~Switcher~~  Manager
-Yes, we do extend the functionality, and now it not just only switches the default profile but also you can add a profile
+
 [![Actions Status](https://github.com/99stealth/aws-profile-manager/workflows/Check%20and%20Test/badge.svg)](https://github.com/99stealth/aws-profile-manager/actions)
 ![Vulnerability Check](https://img.shields.io/snyk/vulnerabilities/github/99stealth/aws-profile-manager)
 [![PyPI version](https://badge.fury.io/py/aws-profile-manager.svg)](https://badge.fury.io/py/aws-profile-manager)
 ![GitHub License](https://img.shields.io/github/license/99stealth/aws-profile-manager)
 ![Commit Activity](https://img.shields.io/github/commit-activity/m/99stealth/aws-profile-manager)
+
+Yes, we do extend the functionality, and now it not just only switches the default profile but also:
+- Add profiles
+- Remove profiles
 
 The tool which allows you to jump between your profiles in your `~/.aws/credentials`
 
