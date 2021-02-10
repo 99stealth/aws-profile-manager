@@ -3,6 +3,7 @@
 Icon?
 env
 .env
+.venv
 *.swp
 *.pyc
 __pycache__
