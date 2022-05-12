@@ -26,10 +26,12 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ],
     packages=find_packages(exclude=['aws-profile-manager.tests']),
     include_package_data=True,
-    install_requires=['configparser', 'argparse', 'click'],
+    install_requires=['configparser', 'argparse', 'click', 'boto3'],
     entry_points={
         'console_scripts': [
             'aws-profile-manager=aws_profile_manager.cli:cli'
