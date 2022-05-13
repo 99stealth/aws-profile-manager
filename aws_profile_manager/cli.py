@@ -1,5 +1,3 @@
-from email.policy import default
-from importlib.metadata import version
 import os
 import sys
 import click
