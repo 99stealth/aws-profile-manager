@@ -38,8 +38,8 @@ def cli(aws_profile_name, yes):
                     else:
                         print("Yes or No?")
     aws_access_key_id, aws_secret_access_key = rotate.create_access_key()
-    all_profiles[aws_profile_name]['aws_access_key_id'] = aws_access_key_id
-    all_profiles[aws_profile_name]['aws_secret_access_key'] = aws_secret_access_key
-    common.rewrite_credentials_file(all_profiles, users_home)
     if aws_access_key_id and aws_secret_access_key:
         rotate.delete_access_key(access_key_id=access_key_id)
+        all_profiles[aws_profile_name]['aws_access_key_id'] = aws_access_key_id
+        all_profiles[aws_profile_name]['aws_secret_access_key'] = aws_secret_access_key
+        common.rewrite_credentials_file(all_profiles, users_home)
