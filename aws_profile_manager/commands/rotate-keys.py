@@ -28,7 +28,7 @@ def cli(aws_profile_name, yes):
                         answer = 'yes'
                     else:
                         _ak_last_used = rotate.get_access_key_last_used(_ak)
-                        answer = input(f"\nAccess key {_ak} (last used: {_ak_last_used['LastUsedDate'] if 'LastUsedDate' in _ak_last_used else 'N/A'}) will be deleted. Do you agree with that? [Y/n]: ")
+                        answer = input(f"\nAccess key {_ak} (last used: {_ak_last_used['LastUsedDate'] if 'LastUsedDate' in _ak_last_used else 'N/A'}) will be deleted. Do you agree with that? [Y/n] ")
                     if answer.lower() == "yes" or answer.lower() == "y":
                         rotate.delete_access_key(access_key_id=_ak)
                         break
