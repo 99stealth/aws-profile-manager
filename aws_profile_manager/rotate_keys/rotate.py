@@ -1,14 +1,18 @@
 import sys
 import logging
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 from xmlrpc.client import Boolean
 import boto3
+from botocore import exceptions
 
 class Rotate: #meybe Rotate sounds better
-    def __init__(self, access_key_id):
-        self.access_key_id = access_key_id
-        self.username = boto3.client('sts').get_caller_identity().get("Arn").split("/")[-1]
-        self.iam_client = boto3.client('iam')
+    def __init__(self):
+        try:
+            self.username = boto3.client('sts').get_caller_identity().get("Arn").split("/")[-1]
+            self.iam_client = boto3.client('iam')
+        except exceptions.ClientError:
+            logging.error("There is some issue with connection to the AWS using your current credentials. Exit...")
+            sys.exit(1)
 
     def get_access_keys(self) -> List:
         _access_keys_data = self.iam_client.list_access_keys(UserName=self.username).get('AccessKeyMetadata')
@@ -23,7 +27,7 @@ class Rotate: #meybe Rotate sounds better
             )
         except:
             logging.error(f"Something went wrong during the {access_key_id} access key removal")
-            return False
+            return response
         else:
             logging.info(f"Access key {access_key_id} has been successfully removed")
         return
@@ -35,7 +39,7 @@ class Rotate: #meybe Rotate sounds better
             )
         except:
             logging.error(f"Something went wrong during the process of new credentials creation")
-            return False
+            return (False, False)
         else:
             logging.info(f"New credentials for user {self.username} have been successfully created")
         return (response.get('AccessKey').get('AccessKeyId'), response.get('AccessKey').get('SecretAccessKey'))
