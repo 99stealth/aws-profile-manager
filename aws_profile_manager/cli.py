@@ -37,9 +37,6 @@ class MyCLI(click.MultiCommand):
             eval(code, ns, ns)
         return ns['cli']
 
-# cli = MyCLI(help='This tool\'s subcommands are loaded from a '
-            # 'plugin folder dynamically.')
-
 class RootFlags(object):
     def __init__(self, quiet=None) -> None:
         self.quiet = quiet
