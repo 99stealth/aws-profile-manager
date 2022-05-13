@@ -6,7 +6,7 @@ import boto3
 from botocore import exceptions
 
 class Rotate: #meybe Rotate sounds better
-    def __init__(self):
+    def __init__(self) -> None:
         try:
             self.username = boto3.client('sts').get_caller_identity().get("Arn").split("/")[-1]
             self.iam_client = boto3.client('iam')

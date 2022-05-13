@@ -18,9 +18,9 @@ def cli(aws_profile_name, yes):
     rotate = Rotate()
     current_access_keys = rotate.get_access_keys()
     if len(current_access_keys) > 1:
-        logging.warning(f'''There is more than one access key is created for the current user. 
-        One (which is not used in profile [{aws_profile_name}]) should be deleted. 
-        Otherwise, it is not possible to make a credentials rotation''')
+        logging.warning(f'There is more than one access key is created for the current user. '
+        'One (which is not used in profile [{aws_profile_name}]) should be deleted. '
+        'Otherwise, it is not possible to make a credentials rotation')
         for _ak in current_access_keys:
             if _ak != access_key_id:
                 while True:
