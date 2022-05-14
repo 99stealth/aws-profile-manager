@@ -6,7 +6,7 @@ from aws_profile_manager import Common, Rotate
 
 @click.command()
 @click.option('--aws-profile-name', required=False, help="AWS profile to rotate keys", type=str)
-@click.option('--yes', is_flag=True, required=False, help="AWS profile to rorate keys", default=False, type=bool)
+@click.option('--yes', is_flag=True, required=False, help="Confirm that you agree to rotate keys. Avoids manual confirmation", default=False, type=bool)
 def cli(aws_profile_name, yes):
     """ Rotate keys for defined profile ~/.aws/credentials """
     common = Common()

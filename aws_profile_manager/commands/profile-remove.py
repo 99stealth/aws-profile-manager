@@ -5,7 +5,8 @@ from aws_profile_manager import Common
 
 @click.command()
 @click.option('--aws-profile-name', required=False, help="AWS profile to remove", type=str)
-def cli(aws_profile_name):
+@click.option('--yes', is_flag=True, required=False, help="Confirm that you agree to remove keys. Avoids manual confirmation", default=False, type=bool)
+def cli(aws_profile_name, yes):
     """ Removes AWS profile from your ~/.aws/credentials """
     common = Common()
 
@@ -15,7 +16,10 @@ def cli(aws_profile_name):
         aws_profile_name = common.choose_profile(all_profiles, operation="remove")
     try:
         while True:
-            answer = input("Profile [{}] will be removed. Are you sure you want to proceed? [Y/n] ".format(aws_profile_name))
+            if yes:
+                answer = 'yes'
+            else:
+                answer = input("Profile [{}] will be removed. Are you sure you want to proceed? [Y/n] ".format(aws_profile_name))
             if answer.lower() == "yes" or answer.lower() == "y":
                 del all_profiles[aws_profile_name]
                 logging.info("Profile {} has been successfuly removed from {}/.aws/credentials".format(aws_profile_name, users_home))
