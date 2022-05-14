@@ -1,7 +1,6 @@
 import sys
 import logging
-from typing import List, Tuple, Dict
-from xmlrpc.client import Boolean
+from typing import List, Tuple
 import boto3
 from botocore import exceptions
 
