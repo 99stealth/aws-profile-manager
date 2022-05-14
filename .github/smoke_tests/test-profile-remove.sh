@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "----------- Testing utility version functionality -----------"
+echo "-------- Testing utility profile-remove functionality --------"
 
 mkdir -p ~/.aws
 touch ~/.aws/credentials
