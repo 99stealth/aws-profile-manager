@@ -3,21 +3,20 @@ import sys
 import click
 import logging
 
-def setup_logging(quiet: bool, verbose: bool):
+from aws_profile_manager._version import __version__
+
+def setup_logging(quiet: bool):
     ''' Function is setting logging configuration '''
 
-    if verbose:
-        logging_level = logging.INFO
-    elif quiet:
-        logging_level = logging.ERROR
-    else:
+    if quiet:
         logging_level = logging.WARNING
+    else:
+        logging_level = logging.INFO
     logging.basicConfig(format='%(message)s', level=logging_level)
 
 plugin_folder = os.path.join(os.path.dirname(__file__), 'commands')
 
 class MyCLI(click.MultiCommand):
-
     def list_commands(self, ctx):
         rv = []
         for filename in os.listdir(plugin_folder):
@@ -36,12 +35,20 @@ class MyCLI(click.MultiCommand):
             eval(code, ns, ns)
         return ns['cli']
 
-cli = MyCLI(help='This tool\'s subcommands are loaded from a '
-            'plugin folder dynamically.')
+class RootFlags(object):
+    def __init__(self, quiet=None) -> None:
+        self.quiet = quiet
+
+@click.group(cls=MyCLI, help='This tool\'s subcommands are loaded from a plugin folder dynamically.')
+@click.pass_context
+@click.version_option(__version__)
+@click.option('-q', '--quiet', help='Less outputs', type=bool, is_flag=True, required=False, default=False)
+def cli(ctx, quiet):
+    ctx.obj = RootFlags(quiet)
+    setup_logging(quiet=quiet)
 
 if __name__ == '__main__':
     try:
-        setup_logging(quiet=False, verbose=False)
         cli()
     except KeyboardInterrupt:
         logging.error("\nProcess has been stopped. Interrupted by user")

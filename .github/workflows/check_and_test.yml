@@ -14,7 +14,7 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8, 3.9]
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python ${{ matrix.python-version }}
@@ -36,6 +36,15 @@ jobs:
     - name: Unit tests
       run: |
         nosetests -v --all-modules --with-coverage --cover-package=aws_profile_manager
+    - name: Setup Fake AWS credentials
+      run: |
+        mkdir -p ~/.aws
+        touch ~/.aws/credentials
+        tee -a greetings.txt > /dev/null <<EOT
+        [default]
+        aws_access_key_id = AKIAXXXXXXXXXXXXXXXX
+        aws_secret_access_key = xXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxX
+        EOT
     - name: Smoke tests
       run: |
         TEST_DIR='.github/smoke_tests/'

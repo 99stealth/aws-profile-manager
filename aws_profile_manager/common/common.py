@@ -3,6 +3,7 @@ import re
 from os.path import expanduser
 from typing import Dict
 import configparser
+import logging
 
 class Common:
     def get_users_home(self) -> str:
@@ -63,3 +64,22 @@ class Common:
         if re.match('^[A-Za-z0-9+=/]{40}$', aws_secret_access_key):
             return True
         return False
+
+    def choose_profile(self, profiles, operation) -> str:
+        i = 1
+        counter = {}
+        for profile in profiles:
+            counter[i] = profile
+            i += 1
+        for c in counter:
+            print("{}: {}".format(c, counter[c]))
+        while True:
+            try:
+                answer = input(f"\nChoose a number of the profile which you want to {operation}: ")
+            except (KeyboardInterrupt, EOFError):
+                logging.error("\nProcess has been stopped. Interrupted by user")
+                sys.exit(1)
+            try:
+                return counter[int(answer)]
+            except ValueError as e:
+                logging.error("Answer \"{}\" is not valid. Please provide number from 1 to {}".format(answer, len(counter)))

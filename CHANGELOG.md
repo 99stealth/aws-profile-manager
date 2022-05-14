@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0](https://github.com/99stealth/aws-profile-manager/tree/v0.4.0) - 2022-05-14
+### Added
+- Functionality that allows to rotate aws access keys
+- `--verson` and `--quiet` root options
+- CLI confirmation to `remove-profile` command
+### Changed
+- Function `choose_profile_to_remove` to `choose_profile` in `profile-remove` command
+### Removed
+- `profile_remove` module because of moving all its functionality to the `common` module
+
 ## [0.3.4](https://github.com/99stealth/aws-profile-manager/tree/v0.3.4) - 2021-01-10
 ### Added
 - Functionality which allows to remove profiles
