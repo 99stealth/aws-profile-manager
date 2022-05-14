@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Functionality that allows to rotate aws access keys
 - `--verson` and `--quiet` root options
+- CLI confirmation to `remove-profile` command
 ### Changed
 - Function `choose_profile_to_remove` to `choose_profile` in `profile-remove` command
 ### Removed
