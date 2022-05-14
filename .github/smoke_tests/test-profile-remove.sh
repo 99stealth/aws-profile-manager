@@ -2,7 +2,10 @@
 
 echo "----------- Testing utility version functionality -----------"
 
-python3 -m aws_profile_manager.cli --version
+mkdir -p ~/.aws
+touch ~/.aws/credentials
+
+python3 -m aws_profile_manager.cli profile-remove --aws-profile-name=test
 
 if [ $? == 0 ]; then 
     echo "[+] Test Passed"
