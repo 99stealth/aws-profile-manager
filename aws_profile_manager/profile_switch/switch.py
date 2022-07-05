@@ -20,14 +20,14 @@ class Switch:
             The function returns a backup name for current backup if the user agreed to back it up 
             otherwise it returns None """
 
-        print("There is no default profile duplication among all accounts in {}/.aws/credentials".format(users_home))
+        print(f"There is no default profile duplication among all accounts in {users_home}/.aws/credentials")
         while True:
             try:
                 answer = input("Do you want to make backup of your current [default] profile? [Y/n] ")
                 if answer.lower() == "yes" or answer.lower() == "y":
                     new_default_name = input("Enter new name for your currnet [default] profile: ")
                     if new_default_name in profiles:
-                        print("Profile with name {} is already exists in {}/.aws/credentials. Try once more".format(new_default_name, users_home))
+                        print(f"Profile with name {new_default_name} is already exists in {users_home}/.aws/credentials. Try once more")
                         continue
                     else:
                         return new_default_name
@@ -59,7 +59,7 @@ class Switch:
             counter[i] = profile
             i += 1
         for c in counter:
-            print("{}: {}".format(c, counter[c]))
+            print(f"{c}: {counter[c]}")
         while True:
             try:
                 answer = input("\nChoose a number of the account to which you want to switch your current default: ")
@@ -69,4 +69,4 @@ class Switch:
             try:
                 return counter[int(answer)]
             except ValueError as e:
-                logging.error("Answer \"{}\" is not valid. Please provide number from 1 to {}".format(answer, len(counter)))
+                logging.error(f"Answer \"{answer}\" is not valid. Please provide number from 1 to {len(counter)}")

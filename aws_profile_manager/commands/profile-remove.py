@@ -19,16 +19,16 @@ def cli(aws_profile_name, yes):
             if yes:
                 answer = 'yes'
             else:
-                answer = input("Profile [{}] will be removed. Are you sure you want to proceed? [Y/n] ".format(aws_profile_name))
+                answer = input(f"Profile [{aws_profile_name}] will be removed. Are you sure you want to proceed? [Y/n] ")
             if answer.lower() == "yes" or answer.lower() == "y":
                 del all_profiles[aws_profile_name]
-                logging.info("Profile {} has been successfuly removed from {}/.aws/credentials".format(aws_profile_name, users_home))
+                logging.info(f"Profile {aws_profile_name} has been successfuly removed from {users_home}/.aws/credentials")
                 break
             elif answer.lower() == "no" or answer.lower() == "n":
                 break
             else:
                 print("Yes or No?")
     except KeyError as e:
-        logging.error("Looks like profile {} does not exist in {}/.aws/credentials".format(e, users_home))
+        logging.error(f"Looks like profile {e} does not exist in {users_home}/.aws/credentials")
         sys.exit(1)
     common.rewrite_credentials_file(all_profiles, users_home)
