@@ -12,11 +12,11 @@ def cli():
     all_profiles = common.get_all_profiles(users_home)
     new_default_profile_name = None
     if "default" not in all_profiles:
-        logging.warning("There is no [default] profile in your {}/.aws/credentials. It will be automatically created".format(users_home))
+        logging.warning(f"There is no [default] profile in your {users_home}/.aws/credentials. It will be automatically created")
     else:
         defaults_backup = switch.get_defaults_backup(all_profiles)
         if defaults_backup:
-            logging.warning("Your current default is \033[1m{}\033[0m \n".format(defaults_backup))
+            logging.warning(f"Your current default is \033[1m{defaults_backup}\033[0m \n")
         else:
             new_default_profile_name = switch.ask_new_name_for_default_profile(users_home, all_profiles)
             if new_default_profile_name:

@@ -17,7 +17,7 @@ class Common:
     
         profiles = {}
         config = configparser.ConfigParser()
-        config.read('{}/.aws/credentials'.format(users_home))
+        config.read(f'{users_home}/.aws/credentials')
         sections = config.sections()
         for section in sections:
             section_items = {}
@@ -45,7 +45,7 @@ class Common:
         config = configparser.ConfigParser()
         for profile in new_profiles_list:
             config[profile] = new_profiles_list[profile]
-        config.write(open('{}/.aws/credentials'.format(users_home), 'w'))
+        config.write(open(f'{users_home}/.aws/credentials', 'w'))
 
     def aws_access_key_id_is_valid(self, aws_access_key_id):
         ''' The method receives the string with AWS Access Key ID and checks if
@@ -72,7 +72,7 @@ class Common:
             counter[i] = profile
             i += 1
         for c in counter:
-            print("{}: {}".format(c, counter[c]))
+            print(f"{c}: {counter[c]}")
         while True:
             try:
                 answer = input(f"\nChoose a number of the profile which you want to {operation}: ")
@@ -82,4 +82,4 @@ class Common:
             try:
                 return counter[int(answer)]
             except ValueError as e:
-                logging.error("Answer \"{}\" is not valid. Please provide number from 1 to {}".format(answer, len(counter)))
+                logging.error(f"Answer \"{answer}\" is not valid. Please provide number from 1 to {len(counter)}")
