@@ -1,14 +1,9 @@
-# AWS Profile ~~Switcher~~  Manager
+# AWS Profile Manager
 
 [![Actions Status](https://github.com/99stealth/aws-profile-manager/workflows/Check%20and%20Test/badge.svg)](https://github.com/99stealth/aws-profile-manager/actions)
-![Vulnerability Check](https://img.shields.io/snyk/vulnerabilities/github/99stealth/aws-profile-manager)
 [![PyPI version](https://badge.fury.io/py/aws-profile-manager.svg)](https://badge.fury.io/py/aws-profile-manager)
 ![GitHub License](https://img.shields.io/github/license/99stealth/aws-profile-manager)
 ![Commit Activity](https://img.shields.io/github/commit-activity/m/99stealth/aws-profile-manager)
-
-Yes, we do extend the functionality, and now it not just only switches the default profile but also:
-- Add profiles
-- Remove profiles
 
 The tool which allows you to jump between your profiles in your `~/.aws/credentials`
 
@@ -26,40 +21,78 @@ Or `clone` this repository and run
 make install
 ```
 
-## How does it work (Legacy)
-### Simple switch (Legacy)
-![Simple switch](.media/simple-switch.gif)
+## Usage
 
-What have you seen:
-- User called `aws-profile-switcher`
-- `aws-profile-switcher` identified that current default is among of all profiles so it allowd to proceed without any aditional operations
-- `aws-profile-switcher` asked user to choose new default profile
-- `aws-profile-switcher` switched the default
+```
+Usage: aws-profile-manager [OPTIONS] COMMAND [ARGS]...
 
-### In case you have a default but no backup for it (Legacy)
-![Backup for default](.media/backup-for-default.gif)
+  This tool's subcommands are loaded from a plugin folder dynamically.
 
-What have you seen:
-- User called `aws-profile-switcher`
-- `aws-profile-switcher` understood that there is no backup for profile that is currently set to default and suggested to make a backup
-- User agreed to make a backup and gave it the name
-- `aws-profile-switcher` asked user to choose new default profile
-- Voila, default is changed and the old default is backed up
+Options:
+  --version    Show the version and exit.
+  -q, --quiet  Less outputs
+  --help       Show this message and exit.
 
-### In case there is no default at all (Legacy)
-![No default at all](.media/no-default.gif)
+Commands:
+  profile-add     Add new AWS profile to your ~/.aws/credentials
+  profile-remove  Removes AWS profile from your ~/.aws/credentials
+  profile-switch  Switch default AWS profile in your ~/.aws/credentials
+  rotate-keys     Rotate keys for defined profile ~/.aws/credentials
+```
 
-What have you seen:
-- User called `aws-profile-switcher`
-- `aws-profile-switcher` asked user to choose new default profile
-- There was no defalut profile at all, so `aws-profile-switcher` has created it
+## How does it work
+### Add profile
+Allows to add new profile to your `~/.aws/credentials`
+To run `profile-add` in interactive run next command
+```
+aws-profile-manager profile-add
+```
+Or you can specify everything inline
+```
+aws-profile-manager profile-add --aws-profile-name=your-profile-name --aws-access-key-id=AKIAAAAAAAAAAAAAAAAA --aws-secret-access-key=Aa1Aa0az00+AzA/01AzZZZz0Z0z0ZzzZZzZZz0zZ
+```
 
-### In case user doesn't want backing up the default (Legacy)
-![No backup for the default](.media/no-default.gif)
+### Remove profile
+Allows to add remove profile from your `~/.aws/credentials`
+To run `profile-remove` in interactive mode run next command
+```
+aws-profile-manager profile-remove
+```
+Or you can specify the profile inline and confirm that you understand that profile will be removed from your file using flag `--yes`
+```
+aws-profile-manager profile-remove --aws-profile-name=your-profile-name --yes
+```
 
-What have you seen:
-- User called `aws-profile-switcher`
-- `aws-profile-switcher` understood that there is no backup for profile that is currently set to default and suggested to make a backup
-- User disagreed to make a backup
-- `aws-profile-switcher` asked to agreed that he/she doesn't want to make a backup
-- Default is changed and the old default was not backed up
+### Switch profile 
+Makes a specified profile default in your `~/.aws/credentials`
+To run `profile-switch` in interactive mode run next command
+```
+aws-profile-manager profile-switch
+```
+Unfortunately, there is no inline option here, but I swear it will be added in the nearest future
+
+### List profiles
+Shows all AWS profile from your `~/.aws/credentials` and exits
+```
+aws-profile-manager profile-list
+```
+
+### Rotate keys
+Rotate keys for defined profile `~/.aws/credentials`
+To run `rotate-keys` in interactive mode run next command
+```
+aws-profile-manager rotate-keys 
+```
+Or you can specify the profile inline and confirm that you understand that keys for profile will be rotated using flag `--yes`
+```
+aws-profile-manager rotate-keys --aws-profile-name=your-profile-name --yes
+```
+> :warning: Be careful in case you specified `--yes` flag since you will not see tips regarding your keys. Rotation will DELETE your key second key if such exists since there may be only two keys per user and the rotation procedure requires to create new key before deleting an old one
+Also, you can make the rotaton on a regular basis using cron. Simply add this line to your `crontab`.
+```
+crontab -e
+```
+In order to rotate on monthly basis add next line
+```
+@monthly aws-profile-manager rotate-keys --aws-profile-name=your-profile-name --yes
+```
