@@ -30,13 +30,9 @@ class MyCLI(click.MultiCommand):
     def get_command(self, ctx, name):
         ns = {}
         fn = os.path.join(plugin_folder, name + '.py')
-        try:
-            with open(fn) as f:
-                code = compile(f.read(), fn, 'exec')
-                eval(code, ns, ns)
-        except FileNotFoundError:
-            logging.error(f'No such command {name}')
-            return
+        with open(fn) as f:
+            code = compile(f.read(), fn, 'exec')
+            eval(code, ns, ns)
         return ns['cli']
 
 class RootFlags(object):
