@@ -49,24 +49,3 @@ class Switch:
     def create_backup_for_default(self, profiles: Dict, new_default_profile_name: str) -> Dict:
         profiles[new_default_profile_name] = profiles["default"]
         return profiles
-
-    def choose_new_default(self, profiles: Dict, new_default_profile_name: str) -> str:
-        i = 1
-        counter = {}
-        for profile in profiles:
-            if profile == "default" or profile == new_default_profile_name:
-                continue
-            counter[i] = profile
-            i += 1
-        for c in counter:
-            print(f"{c}: {counter[c]}")
-        while True:
-            try:
-                answer = input("\nChoose a number of the account to which you want to switch your current default: ")
-            except (KeyboardInterrupt, EOFError):
-                logging.error("\nProcess has been stopped. Interrupted by user")
-                sys.exit(1)
-            try:
-                return counter[int(answer)]
-            except ValueError as e:
-                logging.error(f"Answer \"{answer}\" is not valid. Please provide number from 1 to {len(counter)}")

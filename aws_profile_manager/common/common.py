@@ -65,10 +65,12 @@ class Common:
             return True
         return False
 
-    def choose_profile(self, profiles, operation) -> str:
+    def choose_profile(self, profiles: Dict, operation: str, skip_profiles=[]) -> str:
         i = 1
         counter = {}
         for profile in profiles:
+            if profile in skip_profiles:
+                continue
             counter[i] = profile
             i += 1
         for c in counter:
