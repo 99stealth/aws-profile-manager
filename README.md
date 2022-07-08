@@ -35,6 +35,7 @@ Options:
 
 Commands:
   profile-add     Add new AWS profile to your ~/.aws/credentials
+  profile-current  Show current aws profile from ~/.aws/credentials
   profile-remove  Removes AWS profile from your ~/.aws/credentials
   profile-switch  Switch default AWS profile in your ~/.aws/credentials
   rotate-keys     Rotate keys for defined profile ~/.aws/credentials
@@ -95,4 +96,30 @@ crontab -e
 In order to rotate on monthly basis add next line
 ```
 @monthly aws-profile-manager rotate-keys --aws-profile-name=your-profile-name --yes
+```
+
+### Bash
+
+Use the `profile-current` command to update your terminal prompt:
+
+Place this in your .bashrc or similar:
+
+```
+function show_profile
+{
+    profile=$(aws-profile-manager profile-current)
+    PS1='\[${profile}\]:${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+}
+
+function switch_profile
+{
+    apm profile-switch
+    show_profile
+}
+```
+
+Now your prompt will show the current profile:
+
+```
+PROFILE:USER@MACHINE:PATH\$ 
 ```
