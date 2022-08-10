@@ -24,7 +24,7 @@ make install
 ## Usage
 
 ```
-Usage: python -m aws_profile_manager.cli [OPTIONS] COMMAND [ARGS]...
+Usage: aws-profile-manager [OPTIONS] COMMAND [ARGS]...
 
   This tool's subcommands are loaded from a plugin folder dynamically.
 
