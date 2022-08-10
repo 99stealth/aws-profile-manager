@@ -34,10 +34,12 @@ Options:
   --help       Show this message and exit.
 
 Commands:
-  profile-add     Add new AWS profile to your ~/.aws/credentials
-  profile-remove  Removes AWS profile from your ~/.aws/credentials
-  profile-switch  Switch default AWS profile in your ~/.aws/credentials
-  rotate-keys     Rotate keys for defined profile ~/.aws/credentials
+  profile-add      Add new AWS profile to your ~/.aws/credentials
+  profile-current  Shows current default AWS profile from your...
+  profile-list     Shows all AWS profile from your ~/.aws/credentials
+  profile-remove   Removes AWS profile from your ~/.aws/credentials
+  profile-switch   Switch default AWS profile in your ~/.aws/credentials
+  rotate-keys      Rotate keys for defined profile ~/.aws/credentials
 ```
 
 ## How does it work
