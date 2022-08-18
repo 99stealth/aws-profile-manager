@@ -14,8 +14,12 @@ def cli(aws_profile_name, yes):
     all_profiles = common.get_all_profiles(users_home)
     if not aws_profile_name:
         aws_profile_name = common.choose_profile(all_profiles, operation="rotate")
-    access_key_id = all_profiles.get(aws_profile_name).get('aws_access_key_id')
-    rotate = Rotate()
+    try:
+        access_key_id = all_profiles.get(aws_profile_name).get('aws_access_key_id')
+    except:
+        logging.error(f"No such profile {aws_profile_name} in your credentials file")
+        sys.exit(1)
+    rotate = Rotate(aws_profile_name)
     current_access_keys = rotate.get_access_keys()
     if len(current_access_keys) > 1:
         logging.warning('There is more than one access key is created for the current user. '

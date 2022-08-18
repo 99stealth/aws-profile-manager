@@ -4,12 +4,13 @@ from typing import List, Tuple
 import boto3
 from botocore import exceptions
 
-class Rotate: #meybe Rotate sounds better
-    def __init__(self) -> None:
+class Rotate:
+    def __init__(self, aws_profile_name) -> None:
         """ Class constructor """
         try:
-            self.username = boto3.client('sts').get_caller_identity().get("Arn").split("/")[-1]
-            self.iam_client = boto3.client('iam')
+            self.session = boto3.Session(profile_name=aws_profile_name)
+            self.username = self.session.client('sts').get_caller_identity().get("Arn").split("/")[-1]
+            self.iam_client = self.session.client('iam')
         except exceptions.ClientError:
             logging.error("There is some issue with connection to the AWS using your current credentials. Exit...")
             sys.exit(1)
