@@ -35,7 +35,8 @@ Options:
 
 Commands:
   profile-add      Add new AWS profile to your ~/.aws/credentials
-  profile-current  Shows current default AWS profile from your...
+  profile-current  Shows current default AWS profile from your ~/.aws/credentials
+  profile-edit     Edit AWS profile from your ~/.aws/credentials
   profile-list     Shows all AWS profile from your ~/.aws/credentials
   profile-remove   Removes AWS profile from your ~/.aws/credentials
   profile-switch   Switch default AWS profile in your ~/.aws/credentials
@@ -52,6 +53,17 @@ aws-profile-manager profile-add
 Or you can specify everything inline
 ```
 aws-profile-manager profile-add --aws-profile-name=your-profile-name --aws-access-key-id=AKIAAAAAAAAAAAAAAAAA --aws-secret-access-key=Aa1Aa0az00+AzA/01AzZZZz0Z0z0ZzzZZzZZz0zZ
+```
+
+### Edit profile
+Allows to edit existing profile in your `~/.aws/credentials`
+To run `profile-edit` in interactive run next command
+```
+aws-profile-manager profile-edit
+```
+Or you can specify everything inline
+```
+aws-profile-manager profile-edit --aws-profile-name=your-profile-name --aws-access-key-id=AKIAAAAAAAAAAAAAAAAA --aws-secret-access-key=Aa1Aa0az00+AzA/01AzZZZz0Z0z0ZzzZZzZZz0zZ
 ```
 
 ### Remove profile
