@@ -83,5 +83,6 @@ class Common:
                 sys.exit(1)
             try:
                 return counter[int(answer)]
-            except ValueError as e:
+            except (ValueError, KeyError) as e:
                 logging.error(f"Answer \"{answer}\" is not valid. Please provide number from 1 to {len(counter)}")
+                logging.debug(e)
