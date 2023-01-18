@@ -7,7 +7,8 @@ from aws_profile_manager import Common, Edit
 @click.option('--aws-profile-name', required=False, help="AWS profile to edit", type=str)
 @click.option('--aws-access-key-id', required=False, help="AWS Access Key ID", type=str)
 @click.option('--aws-secret-access-key', required=False, help="AWS Secret Access Key", type=str)
-def cli(aws_profile_name, aws_access_key_id, aws_secret_access_key):
+@click.option('--aws-session-token', required=False, help="AWS Security Token", type=str)
+def cli(aws_profile_name, aws_access_key_id, aws_secret_access_key, aws_session_token):
     """ Edit AWS profile from your ~/.aws/credentials """
     common = Common()
     edit = Edit()
@@ -33,9 +34,16 @@ def cli(aws_profile_name, aws_access_key_id, aws_secret_access_key):
                 logging.error("Invalid AWS_SECRET_ACCESS_KEY format. Please, try again")
             else:
                 break
+    if not aws_session_token:
+        aws_session_token = edit.ask_aws_session_token()
+    
     all_profiles[aws_profile_name] = { 
         'aws_access_key_id': aws_access_key_id, 
         'aws_secret_access_key': aws_secret_access_key
         }
+    
+    if aws_session_token:
+        all_profiles[aws_profile_name]['aws_session_token'] = aws_session_token
+
     common.rewrite_credentials_file(all_profiles, users_home)
     

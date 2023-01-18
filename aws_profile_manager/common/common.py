@@ -52,7 +52,7 @@ class Common:
         it is valid. If everything is in order it will return True otherwise
         it returns False '''
 
-        if re.match('^AK[A-Z0-9]{18}$', aws_access_key_id):
+        if re.match('^A(K|S)[A-Z0-9]{18}$', aws_access_key_id):
             return True
         return False
 

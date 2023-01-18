@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0](https://github.com/99stealth/aws-profile-manager/tree/v0.7.0) - 2023-01-18
+### Add
+- Possibility to add AWS Session Token to new or existing profiles
+
 ## [0.6.0](https://github.com/99stealth/aws-profile-manager/tree/v0.6.0) - 2022-10-25
 ### Added
 -  Command `profile-edit` that allows to edit existing profiles
