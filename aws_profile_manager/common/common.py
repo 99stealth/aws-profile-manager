@@ -52,7 +52,16 @@ class Common:
         it is valid. If everything is in order it will return True otherwise
         it returns False '''
 
-        if re.match('^A(K|S)[A-Z0-9]{18}$', aws_access_key_id):
+        if re.match('^AK[A-Z0-9]{18}$', aws_access_key_id):
+            return True
+        return False
+
+    def aws_access_key_id_for_session_token_is_valid(self, aws_access_key_id):
+        ''' The method receives the string with AWS Access Key ID and checks if
+        it is valid. If everything is in order it will return True otherwise
+        it returns False '''
+
+        if re.match('^AS[A-Z0-9]{18}$', aws_access_key_id):
             return True
         return False
 
