@@ -28,7 +28,7 @@ fi
 
 echo "Test #3. Add AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_SESSION_TOKEN"
 
-python3 -m aws_profile_manager.cli profile-add --aws-profile-name=test2 --aws-access-key-id=ASIAAAAAAAAAAAAAAAAA --aws-secret-access-key=Aa1Aa0az00+AzA/01AzZZZz0Z0z0ZzzZZzZZz0zZ --aws-session-token asdgsdhafshaerhaerhserhafhash
+python3 -m aws_profile_manager.cli profile-add --aws-profile-name=default --aws-access-key-id=ASIAAAAAAAAAAAAAAAAA --aws-secret-access-key=Aa1Aa0az00+AzA/01AzZZZz0Z0z0ZzzZZzZZz0zZ --aws-session-token asdgsdhafshaerhaerhserhafhash
 
 if [ $? == 0 ]; then 
     echo "[+] Test Passed"
