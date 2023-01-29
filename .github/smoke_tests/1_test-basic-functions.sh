@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Test Set #1: Test basic functionality"
+
 echo "Test #1. Show version and exit"
 
 python3 -m aws_profile_manager.cli --version

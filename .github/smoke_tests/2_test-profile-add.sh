@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+echo "Test Set #2: Test profile-add functionality"
+
 echo "Test #1. Add AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY"
 
 python3 -m aws_profile_manager.cli profile-add --aws-profile-name=test1 --aws-access-key-id=AKIAAAAAAAAAAAAAAAAA --aws-secret-access-key=Aa1Aa0az00+AzA/01AzZZZz0Z0z0ZzzZZzZZz0zZ
