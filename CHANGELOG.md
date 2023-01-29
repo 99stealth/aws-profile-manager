@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Add
 - Validation for credentials provided via command line
 ### Fix
-- Issue when add the profile with the existing name it rewrites existing one
+- Bug when add the profile with the existing name it rewrites existing one
+- Bug when add/edit profile's credentials with security token it doesn't allow to add it because of wrong OR logic
 
 ## [0.7.1](https://github.com/99stealth/aws-profile-manager/tree/v0.7.1) - 2023-01-18
 ### Fix
