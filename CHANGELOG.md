@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.2](https://github.com/99stealth/aws-profile-manager/tree/v0.7.2) - 2023-01-29
+### Add
+- Validation for credentials provided via command line
+### Fix
+- Issue when add the profile with the existing name it rewrites existing one
+
 ## [0.7.1](https://github.com/99stealth/aws-profile-manager/tree/v0.7.1) - 2023-01-18
 ### Fix
 - Possibility to proceed without AWS Session Token when AWS Access Key ID is not matches with Sessin Token key pattern

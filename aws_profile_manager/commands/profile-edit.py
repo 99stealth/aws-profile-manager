@@ -27,6 +27,10 @@ def cli(aws_profile_name, aws_access_key_id, aws_secret_access_key, aws_session_
                 logging.error("Invalid AWS_ACCESS_KEY_ID format. Please, try again")
             else:
                 break
+    else:
+        if not common.aws_access_key_id_is_valid(aws_access_key_id) or common.aws_access_key_id_for_session_token_is_valid(aws_access_key_id):
+            logging.error("Invalid AWS_ACCESS_KEY_ID format... Exit")
+            exit(1)
     if not aws_secret_access_key:
         while True:
             aws_secret_access_key = edit.ask_aws_secret_access_key()
@@ -34,10 +38,14 @@ def cli(aws_profile_name, aws_access_key_id, aws_secret_access_key, aws_session_
                 logging.error("Invalid AWS_SECRET_ACCESS_KEY format. Please, try again")
             else:
                 break
+    else:
+        if not common.aws_secret_access_key_is_valid(aws_secret_access_key):
+            logging.error("Invalid AWS_SECRET_ACCESS_KEY format... Exit")
+            exit(1)
     if not aws_session_token and common.aws_access_key_id_for_session_token_is_valid(aws_access_key_id):
         aws_session_token = edit.ask_aws_session_token()
     
-    all_profiles[aws_profile_name] = { 
+    all_profiles[aws_profile_name] = {
         'aws_access_key_id': aws_access_key_id, 
         'aws_secret_access_key': aws_secret_access_key
         }
