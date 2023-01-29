@@ -1,10 +1,10 @@
 #!/bin/bash -e
 
-echo "Test Set #5: Test profile list functionality"
+echo "Test Set #5: Test profile current functionality"
 
-echo "Test #1: Show list of profiles"
+echo "Test #1: Remove profile"
 
-python3 -m aws_profile_manager.cli profile-list
+python3 -m aws_profile_manager.cli profile-current
 
 if [ $? == 0 ]; then 
     echo "[+] Test Passed"
